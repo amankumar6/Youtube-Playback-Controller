@@ -1,0 +1,12 @@
+.selector-div{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.selector {
+    background-color: rgb(32,32,32);
+    color: white;
+    width: 100px !important;
+    padding: 2px;
+}
