@@ -18,7 +18,7 @@ $( document ).ready(function() {
                     document.getElementsByClassName('html5-main-video')[0].playbackRate = value;
                 }
                 if(e.target.value) document.getElementsByClassName('html5-main-video')[0].playbackRate = e.target.value;
-                chrome.sttorage.sync.set({value: playbackRate})
+                chrome.storage.sync.set({value: playbackRate})
             })
         });
     }, 1000);
