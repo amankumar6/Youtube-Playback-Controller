@@ -5,3 +5,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{
         });
     }
 });
+
+chrome.tabs.onUpdated.addListener((tabId,changeInfo,tab) => {
+    if (tab.url.indexOf("https://www.youtube.com/") > -1 && changeInfo.url === undefined){
+        chrome.tabs.executeScript(tabId, {file: "./js/executeScript.js"} );
+    }
+});

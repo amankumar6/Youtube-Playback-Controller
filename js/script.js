@@ -6,21 +6,18 @@ $( document ).ready(function() {
     setTimeout(() => {
         $("#meta-contents").before(`<div class="selector-div"><select class="selector" aria-label="Default select example"></select></div>`);
 
-        $(".selector").html(
-            playBack.map((e) =>  `<option value="${e}"> x ${e} </option>`).join('')
-        );
+        $(".selector").html(playBack.map((e) => `<option value="${e}"> x ${e} </option>`).join(''));
+
+        chrome.storage.sync.get(['playbackRate'], (result) => {
+            $("selector").val(result.playbackRate);
+            document.getElementsByClassName('html5-main-video')[0].playbackRate = result.playbackRate;
+        });
         
         $(".selector").change((e) => {
-            chrome.storage.sync.get('value',(selector) =>{
-                let value = 1;
-                if(selector.value){
-                    value = selector.value;
-                    document.getElementsByClassName('html5-main-video')[0].playbackRate = value;
-                }
-                if(e.target.value) document.getElementsByClassName('html5-main-video')[0].playbackRate = e.target.value;
-                chrome.storage.sync.set({value: playbackRate})
-            })
+            if(e.target.value){
+                document.getElementsByClassName('html5-main-video')[0].playbackRate = e.target.value;
+                chrome.storage.sync.set({playbackRate: e.target.value});
+            } 
         });
     }, 1000);
-
 });
